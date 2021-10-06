@@ -1,10 +1,12 @@
 package com.winning.woman.library.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.winning.woman.library.models.Livros;
 import com.winning.woman.library.repositories.LivrosRepository;
+
+import javassist.NotFoundException;
 
 @RestController()
 @RequestMapping(value = "/api")
@@ -36,8 +40,8 @@ public class LivroController {
 		return livrosRepository.save(livros);
 	}
 	
-	@DeleteMapping("/livro")
-	public void deletaLivro(@RequestBody Livros livros) {
-		livrosRepository.delete(livros);
+	@DeleteMapping("livro/{id}")
+	public void deletaLivro(@PathVariable Long id) {
+		livrosRepository.deleteById(id);
 	}
 }
